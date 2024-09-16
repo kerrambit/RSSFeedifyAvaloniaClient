@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:RSSFeedifyAvaloniaClient.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RSSFeedifyAvaloniaClient.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="RSSFeedify">
+        Icon="/Assets/rssfeedify-logo.ico"
+        Title="RSSFeedify GUI Client">
         <views:MainView />
 </Window>
