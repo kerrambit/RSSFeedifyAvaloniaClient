@@ -1,6 +1,19 @@
-﻿namespace RSSFeedifyAvaloniaClient.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
-public class MainViewModel : ViewModelBase
+namespace RSSFeedifyAvaloniaClient.ViewModels;
+
+public partial class MainViewModel : ViewModelBase
 {
-    public string Greeting => "RSSFeedify";
+    [ObservableProperty]
+    private string _title = "RSSFeedify GUI Client";
+
+    [ObservableProperty]
+    private int _counter = 0;
+
+    [RelayCommand]
+    private void ButtonClicked()
+    {
+        Counter++;
+    }
 }
