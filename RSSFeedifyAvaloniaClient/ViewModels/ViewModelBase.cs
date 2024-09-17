@@ -2,6 +2,8 @@
 
 namespace RSSFeedifyAvaloniaClient.ViewModels;
 
-public class ViewModelBase : ObservableObject
+public partial class ViewModelBase : ObservableObject
 {
+    [ObservableProperty]
+    protected ViewModelBase _currentPage;
 }

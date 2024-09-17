@@ -12,9 +12,5 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-	<StackPanel Margin="16" Spacing="16">
-        <TextBlock FontSize="32" Margin="32" Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<TextBlock Text="{Binding Counter, StringFormat='Counter: {0}'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<Button Command="{Binding ButtonClickedCommand}" HorizontalAlignment="Center" VerticalAlignment="Center">Increment</Button>
-	</StackPanel>
+	<TransitioningContentControl Content="{Binding CurrentPage}"></TransitioningContentControl>
 </UserControl>
