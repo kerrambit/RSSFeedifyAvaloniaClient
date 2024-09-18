@@ -13,8 +13,23 @@
 	</Design.DataContext>
 
 	<StackPanel Margin="16" Spacing="16">
-		<TextBlock FontSize="32" Margin="32" Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<Button Command="{Binding SwitchToRegisterCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">Register</Button>
+		<TextBlock FontSize="32" Margin="0 32 0 0" Text="RSSFeedify GUI Client" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<TextBlock FontSize="26" Margin="0 0 0 32" Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+		<StackPanel MaxWidth="200">
+			<TextBox Text="{Binding Email}" Watermark="Email" AcceptsReturn="False" MaxLines="1"></TextBox>
+			<TextBlock Foreground="Red" Text="{Binding EmailError}"></TextBlock>
+			<TextBox PasswordChar="*" Text="{Binding Password}" Watermark="Password" AcceptsReturn="False" MaxLines="1"></TextBox>
+			<TextBlock Foreground="Red" Text="{Binding PasswordError}"></TextBlock>
+			<Button Command="{Binding LoginCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">Login</Button>
+			<TextBlock Foreground="Red" Text="{Binding LoginError}"></TextBlock>
+		</StackPanel>
+
+		<StackPanel Margin="48" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+			<TextBlock Text="Not yet registered? Register now!" Margin="0 0 0 0"></TextBlock>
+			<Button Command="{Binding SwitchToRegisterCommand}"  Margin="32 -3 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">Register</Button>
+		</StackPanel>
+		
 	</StackPanel>
 
 </UserControl>
