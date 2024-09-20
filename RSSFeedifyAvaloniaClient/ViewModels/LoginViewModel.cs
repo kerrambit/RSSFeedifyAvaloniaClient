@@ -1,11 +1,20 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using ClientNetLib.Services.Json;
+using ClientNetLib.Services.Networking;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RSSFeedifyCommon.Models;
+using System.Threading.Tasks;
 
 namespace RSSFeedifyAvaloniaClient.ViewModels;
 
 public partial class LoginViewModel : ViewModelBase
 {
     private readonly MainViewModel _mainViewModel;
+
+    private readonly HttpResponseMessageValidator _httpResponseMessageValidator = new HttpResponseMessageValidatorBuilder()
+            .AddStatusCodeCheck(HTTPService.StatusCode.OK)
+            .AddContentTypeCheck(HTTPService.ContentType.AppJson)
+            .Build();
 
     [ObservableProperty]
     private string _email = string.Empty;
@@ -30,19 +39,37 @@ public partial class LoginViewModel : ViewModelBase
     public LoginViewModel() {}
 
     [RelayCommand]
-    private void Login()
+    private async Task Login()
     {
-        if (Email == "email" && Password == "1234")
+        LoginDTO loginData = new LoginDTO();
+        loginData.Email = Email;
+        loginData.Password = Password;
+        loginData.RememberMe = false;
+
+        var postResult = await _mainViewModel.HttpService.PostAsync(_mainViewModel.UriResourceCreator.BuildUri(EndPoint.ApplicationUser.ConvertToString(), "login"), JsonConvertor.ConvertObjectToJsonString(loginData));
+        if (postResult.IsError)
         {
-            _mainViewModel.UserJWT = "4654g6re4g6wr4g9wr7g98wr7g97wer7g8w";
-            _mainViewModel.CurrentPage = new UserMainDashboardViewModel(_mainViewModel);
+            LoginError = $"Login was not successful. Detailed message: '{postResult.GetError}'.";
+            return;
         }
-        else
+
+        var response = postResult.GetValue;
+        var validationResult = _httpResponseMessageValidator.Validate(new HTTPService.HttpServiceResponseMessageMetaData(HTTPService.RetrieveContentType(response), HTTPService.RetrieveStatusCode(response)));
+        if (validationResult.IsError)
         {
-            EmailError = "Wrong email format";
-            PasswordError = "Password length is too small";
-            LoginError = "Unable to login";
+            LoginError = $"Login was not successful. Detailed message: '{validationResult.GetError}'.";
+            return;
         }
+
+        var jsonResult = await JsonFromHttpResponseReader.ReadJson<LoginResponseDTO>(response);
+        if (jsonResult.IsError)
+        {
+            LoginError = $"Login was not successful. Detailed message: '{jsonResult.GetError}'.";
+            return;
+        }
+
+        _mainViewModel.UserJWT = jsonResult.GetValue.JWT;
+        _mainViewModel.CurrentPage = new UserMainDashboardViewModel(_mainViewModel);
     }
 
     [RelayCommand]
