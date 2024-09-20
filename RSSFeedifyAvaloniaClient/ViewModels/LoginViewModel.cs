@@ -12,11 +12,6 @@ public partial class LoginViewModel : ViewModelBase
 {
     private readonly MainViewModel _mainViewModel;
 
-    private readonly HttpResponseMessageValidator _httpResponseMessageValidator = new HttpResponseMessageValidatorBuilder()
-            .AddStatusCodeCheck(HTTPService.StatusCode.OK)
-            .AddContentTypeCheck(HTTPService.ContentType.AppJson)
-            .Build();
-
     [ObservableProperty]
     private string _email = string.Empty;
 
@@ -91,29 +86,14 @@ public partial class LoginViewModel : ViewModelBase
         loginData.Password = Password;
         loginData.RememberMe = false;
 
-        var postResult = await _mainViewModel.HttpService.PostAsync(_mainViewModel.UriResourceCreator.BuildUri(EndPoint.ApplicationUser.ConvertToString(), "login"), JsonConvertor.ConvertObjectToJsonString(loginData));
-        if (postResult.IsError)
+        var loginResult = await Services.Auth.LoginService.Login(loginData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
+        if (loginResult.IsError)
         {
-            OnUnsuccessfullLogin();
+            OnUnsuccessfullLogin(loginResult.GetError);
             return;
         }
 
-        var response = postResult.GetValue;
-        var validationResult = _httpResponseMessageValidator.Validate(new HTTPService.HttpServiceResponseMessageMetaData(HTTPService.RetrieveContentType(response), HTTPService.RetrieveStatusCode(response)));
-        if (validationResult.IsError)
-        {
-            OnUnsuccessfullLogin();
-            return;
-        }
-
-        var jsonResult = await JsonFromHttpResponseReader.ReadJson<LoginResponseDTO>(response);
-        if (jsonResult.IsError)
-        {
-            OnUnsuccessfullLogin();
-            return;
-        }
-
-        _mainViewModel.UserJWT = jsonResult.GetValue.JWT;
+        _mainViewModel.UserJWT = loginResult.GetValue.JWT;
         _mainViewModel.CurrentPage = new UserMainDashboardViewModel(_mainViewModel);
 
         LoginActivated = false;
@@ -125,9 +105,9 @@ public partial class LoginViewModel : ViewModelBase
         _mainViewModel.CurrentPage = new RegisterViewModel(_mainViewModel);
     }
 
-    private void OnUnsuccessfullLogin()
+    private void OnUnsuccessfullLogin(string? details = null)
     {
-        LoginError = $"Login was not successful!";
+        LoginError = $"Login was not successful! {(string.IsNullOrEmpty(details) ? "" : $"{details}")}";
         Email = string.Empty;
         EmailError = string.Empty;
         Password = string.Empty;
