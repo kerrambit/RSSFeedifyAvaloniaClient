@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:RSSFeedifyAvaloniaClient.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:ui="using:FluentAvalonia.UI.Controls"
              x:Class="RSSFeedifyAvaloniaClient.Views.RegisterView"
 	         x:DataType="vm:RegisterViewModel">
 	<Design.DataContext>
@@ -12,9 +13,41 @@
 		<vm:RegisterViewModel />
 	</Design.DataContext>
 
-	<StackPanel Margin="16" Spacing="16">
-		<TextBlock FontSize="32" Margin="32" Text="Register" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<Button Command="{Binding SwitchToLoginCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">Login</Button>
-	</StackPanel>
+	<DockPanel LastChildFill="True" Margin="16">
+		<!-- Title -->
+		<TextBlock FontSize="32" FontWeight="SemiBold" Text="RSSFeedify GUI Client" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0 32 0 0"/>
+
+		<!-- Register Label -->
+		<TextBlock FontSize="26" Text="Register" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0 0 0 16"/>
+
+		<!-- Logo -->
+		<Border DockPanel.Dock="Top" ClipToBounds="True">
+			<Image Source="avares://RSSFeedifyAvaloniaClient/Assets/rssfeedify-logo.ico" MaxWidth="70" HorizontalAlignment="Center"/>
+		</Border>
+
+		<!-- Login Prompt at the Bottom -->
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="48" DockPanel.Dock="Bottom">
+			<TextBlock Text="Already logged in? Skip registration and log in right away!" VerticalAlignment="Center" />
+			<Button Command="{Binding SwitchToLoginCommand}" Margin="32 0 0 0" VerticalAlignment="Center">Login</Button>
+		</StackPanel>
+
+		<!-- Input Fields and Login Button filling the remaining space -->
+		<StackPanel Spacing="4" Margin="200 0 200 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+			<TextBlock Foreground="Red" Margin="5 0 0 0" Text="{Binding EmailError}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+			<TextBox Text="{Binding Email}" Watermark="Email" AcceptsReturn="False" MaxLines="1" HorizontalAlignment="Stretch"/>
+
+			<TextBlock Foreground="Red" Margin="5 10 0 0" Text="{Binding PasswordError}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+			<TextBox PasswordChar="*" Text="{Binding Password}" Watermark="Password" AcceptsReturn="False" MaxLines="1" HorizontalAlignment="Stretch"/>
+
+			<TextBlock Foreground="Red" Margin="5 10 0 0" Text="{Binding ConfirmPasswordError}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+			<TextBox PasswordChar="*" Text="{Binding ConfirmPassword}" Watermark="Confirm password" AcceptsReturn="False" MaxLines="1" HorizontalAlignment="Stretch"/>
+
+			<StackPanel Spacing="8" Margin="128 25 128 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+				<Button Command="{Binding RegisterCommand}" IsEnabled="{Binding RegistrationEnabled}" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center">Register</Button>
+				<ui:ProgressRing IsActive="{Binding RegistrationActivated}" />
+			</StackPanel>
+			<TextBlock FontSize="18" Foreground="Red" Text="{Binding RegistrationError}" Margin="0 50 0 0" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		</StackPanel>
+	</DockPanel>
 
 </UserControl>
