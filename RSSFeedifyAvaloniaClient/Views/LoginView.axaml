@@ -16,13 +16,13 @@
 		<TextBlock FontSize="32" Margin="0 32 0 0" Text="RSSFeedify GUI Client" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		<TextBlock FontSize="26" Margin="0 0 0 32" Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-		<StackPanel MaxWidth="200">
+		<StackPanel MaxWidth="350">
 			<TextBox Text="{Binding Email}" Watermark="Email" AcceptsReturn="False" MaxLines="1"></TextBox>
-			<TextBlock Foreground="Red" Text="{Binding EmailError}"></TextBlock>
+			<TextBlock Foreground="Red" Text="{Binding EmailError}" TextWrapping="Wrap"></TextBlock>
 			<TextBox PasswordChar="*" Text="{Binding Password}" Watermark="Password" AcceptsReturn="False" MaxLines="1"></TextBox>
-			<TextBlock Foreground="Red" Text="{Binding PasswordError}"></TextBlock>
+			<TextBlock Foreground="Red" Text="{Binding PasswordError}" TextWrapping="Wrap"></TextBlock>
 			<Button Command="{Binding LoginCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">Login</Button>
-			<TextBlock Foreground="Red" Text="{Binding LoginError}"></TextBlock>
+			<TextBlock Foreground="Red" Text="{Binding LoginError}" TextWrapping="Wrap"></TextBlock>
 		</StackPanel>
 
 		<StackPanel Margin="48" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
