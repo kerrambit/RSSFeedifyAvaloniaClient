@@ -71,6 +71,9 @@ public partial class LoginViewModel : ViewModelBase
     [ObservableProperty]
     private string _loginError = string.Empty;
 
+    [ObservableProperty]
+    private bool _loginActivated = false;
+
     public LoginViewModel(MainViewModel mainViewModel)
     {
         _mainViewModel = mainViewModel;
@@ -81,6 +84,8 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task Login()
     {
+        LoginActivated = true;
+
         LoginDTO loginData = new LoginDTO();
         loginData.Email = Email;
         loginData.Password = Password;
@@ -110,6 +115,8 @@ public partial class LoginViewModel : ViewModelBase
 
         _mainViewModel.UserJWT = jsonResult.GetValue.JWT;
         _mainViewModel.CurrentPage = new UserMainDashboardViewModel(_mainViewModel);
+
+        LoginActivated = false;
     }
 
     [RelayCommand]
@@ -125,5 +132,6 @@ public partial class LoginViewModel : ViewModelBase
         EmailError = string.Empty;
         Password = string.Empty;
         PasswordError = string.Empty;
+        LoginActivated = false;
     }
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:RSSFeedifyAvaloniaClient.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:ui="using:FluentAvalonia.UI.Controls"
              x:Class="RSSFeedifyAvaloniaClient.Views.LoginView"
 	         x:DataType="vm:LoginViewModel">
 	<Design.DataContext>
@@ -40,6 +41,7 @@
 
 			<StackPanel Spacing="8" Margin="128 25 128 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
 				<Button Command="{Binding LoginCommand}" IsEnabled="{Binding LoginEnabled}" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center">Login</Button>
+				<ui:ProgressRing IsActive="{Binding LoginActivated}" />
 			</StackPanel>
 			<TextBlock FontSize="18" Foreground="Red" Text="{Binding LoginError}" Margin="0 50 0 0" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		</StackPanel>
