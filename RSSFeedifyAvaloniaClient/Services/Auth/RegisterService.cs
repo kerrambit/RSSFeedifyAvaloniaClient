@@ -7,7 +7,7 @@ namespace RSSFeedifyAvaloniaClient.Services.Auth
 {
     public static class RegisterService
     {
-        public struct Unit {}
+        public struct Unit { }
 
         private static readonly HttpResponseMessageValidator _httpResponseMessageValidator = new HttpResponseMessageValidatorBuilder()
             .AddStatusCodeCheck(HTTPService.StatusCode.OK)

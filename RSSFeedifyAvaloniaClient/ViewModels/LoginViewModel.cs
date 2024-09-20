@@ -1,6 +1,4 @@
-﻿using ClientNetLib.Services.Json;
-using ClientNetLib.Services.Networking;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RSSFeedifyAvaloniaClient.Services.Validation;
 using RSSFeedifyCommon.Models;

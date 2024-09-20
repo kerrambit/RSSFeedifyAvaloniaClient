@@ -2,4 +2,4 @@
 
 namespace RSSFeedifyAvaloniaClient.ViewModels;
 
-public partial class ViewModelBase : ObservableObject {}
+public partial class ViewModelBase : ObservableObject { }
