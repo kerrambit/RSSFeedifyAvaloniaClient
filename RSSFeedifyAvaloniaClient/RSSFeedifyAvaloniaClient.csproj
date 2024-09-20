@@ -19,5 +19,6 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     <PackageReference Include="ClientNetLib" Version="0.1.0-alpha" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.1" />
+    <PackageReference Include="RSSFeedifyCommon" Version="1.0.0" />
   </ItemGroup>
 </Project>
