@@ -2,6 +2,7 @@
 using ClientNetLib.Services.Networking;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RSSFeedifyAvaloniaClient.Services.Validation;
 using RSSFeedifyCommon.Models;
 using System.Threading.Tasks;
 
@@ -22,11 +23,50 @@ public partial class LoginViewModel : ViewModelBase
     [ObservableProperty]
     private string _emailError = string.Empty;
 
+    private bool _emailValidation = false;
+
+    partial void OnEmailChanged(string value)
+    {
+        if (EmailValidator.Validate(in value, out _))
+        {
+            EmailError = string.Empty;
+            _emailValidation = true;
+        }
+        else
+        {
+            EmailError = "Invalid email format!";
+            _emailValidation = false;
+        }
+
+        LoginEnabled = _emailValidation && _passwordValidation;
+    }
+
     [ObservableProperty]
     private string _password = string.Empty;
 
     [ObservableProperty]
     private string _passwordError = string.Empty;
+
+    private bool _passwordValidation = false;
+
+    partial void OnPasswordChanged(string value)
+    {
+        if (value.Length < 8 || value.Length > 100)
+        {
+            PasswordError = "Password length is invalid! Password length must be at least 8 and at most 100 characters long.";
+            _passwordValidation = false;
+        }
+        else
+        {
+            PasswordError = string.Empty;
+            _passwordValidation = true;
+        }
+
+        LoginEnabled = _emailValidation && _passwordValidation;
+    }
+
+    [ObservableProperty]
+    private bool _loginEnabled = false;
 
     [ObservableProperty]
     private string _loginError = string.Empty;
@@ -49,7 +89,7 @@ public partial class LoginViewModel : ViewModelBase
         var postResult = await _mainViewModel.HttpService.PostAsync(_mainViewModel.UriResourceCreator.BuildUri(EndPoint.ApplicationUser.ConvertToString(), "login"), JsonConvertor.ConvertObjectToJsonString(loginData));
         if (postResult.IsError)
         {
-            LoginError = $"Login was not successful. Detailed message: '{postResult.GetError}'.";
+            OnUnsuccessfullLogin();
             return;
         }
 
@@ -57,14 +97,14 @@ public partial class LoginViewModel : ViewModelBase
         var validationResult = _httpResponseMessageValidator.Validate(new HTTPService.HttpServiceResponseMessageMetaData(HTTPService.RetrieveContentType(response), HTTPService.RetrieveStatusCode(response)));
         if (validationResult.IsError)
         {
-            LoginError = $"Login was not successful. Detailed message: '{validationResult.GetError}'.";
+            OnUnsuccessfullLogin();
             return;
         }
 
         var jsonResult = await JsonFromHttpResponseReader.ReadJson<LoginResponseDTO>(response);
         if (jsonResult.IsError)
         {
-            LoginError = $"Login was not successful. Detailed message: '{jsonResult.GetError}'.";
+            OnUnsuccessfullLogin();
             return;
         }
 
@@ -76,5 +116,14 @@ public partial class LoginViewModel : ViewModelBase
     private void SwitchToRegister()
     {
         _mainViewModel.CurrentPage = new RegisterViewModel(_mainViewModel);
+    }
+
+    private void OnUnsuccessfullLogin()
+    {
+        LoginError = $"Login was not successful!";
+        Email = string.Empty;
+        EmailError = string.Empty;
+        Password = string.Empty;
+        PasswordError = string.Empty;
     }
 }

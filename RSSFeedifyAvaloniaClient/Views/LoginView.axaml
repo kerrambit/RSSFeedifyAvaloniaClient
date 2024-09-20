@@ -26,15 +26,15 @@
 		</StackPanel>
 
 		<!-- Input Fields and Login Button filling the remaining space -->
-		<StackPanel Spacing="8" Margin="128 0 128 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+		<StackPanel Spacing="4" Margin="128 0 128 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+			<TextBlock Foreground="Red" Margin="5 0 0 0" Text="{Binding EmailError}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 			<TextBox Text="{Binding Email}" Watermark="Email" AcceptsReturn="False" MaxLines="1" HorizontalAlignment="Stretch"/>
-			<TextBlock Foreground="Red" Text="{Binding EmailError}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
+			<TextBlock Foreground="Red" Margin="5 10 0 0" Text="{Binding PasswordError}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 			<TextBox PasswordChar="*" Text="{Binding Password}" Watermark="Password" AcceptsReturn="False" MaxLines="1" HorizontalAlignment="Stretch"/>
-			<TextBlock Foreground="Red" Text="{Binding PasswordError}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-			<StackPanel Spacing="8" Margin="128 0 128 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-				<Button Command="{Binding LoginCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center">Login</Button>
+			<StackPanel Spacing="8" Margin="128 25 128 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+				<Button Command="{Binding LoginCommand}" IsEnabled="{Binding LoginEnabled}" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center">Login</Button>
 			</StackPanel>
 			<TextBlock FontSize="18" Foreground="Red" Text="{Binding LoginError}" Margin="0 50 0 0" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		</StackPanel>
