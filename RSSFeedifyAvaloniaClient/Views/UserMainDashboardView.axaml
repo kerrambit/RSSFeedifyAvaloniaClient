@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:RSSFeedifyAvaloniaClient.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:ui="using:FluentAvalonia.UI.Controls"
              x:Class="RSSFeedifyAvaloniaClient.Views.UserMainDashboardView"
 	         x:DataType="vm:UserMainDashboardViewModel">
 	<Design.DataContext>
@@ -12,9 +13,27 @@
 		<vm:UserMainDashboardViewModel />
 	</Design.DataContext>
 
-	<StackPanel Margin="16" Spacing="16">
-		<TextBlock FontSize="32" Margin="32" Text="Main Dashboard" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<TextBlock Text="{Binding JWT, StringFormat='JWT of the user is {0}.'}"></TextBlock>
-	</StackPanel>
+	<DockPanel>
+
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+			<!-- Here will be top banner, with notifications bell and user profile. -->
+		</StackPanel>
+		
+		<ui:NavigationView x:Name="UserMainDashboard" DockPanel.Dock="Bottom">
+			<ui:NavigationView.MenuItems>
+				<ui:NavigationViewItem Content="Browse" Tag="SamplePage1" IconSource="Library" />
+				<ui:NavigationViewItem Content="Track an Order" Tag="SamplePage2" IconSource="Map" />
+				<ui:NavigationViewItem Content="Order History" Tag="SamplePage3" IconSource="Tag" />
+			</ui:NavigationView.MenuItems>
+			<ui:NavigationView.FooterMenuItems>
+				<ui:NavigationViewItem Content="Account" Tag="SamplePage4" IconSource="Contact" />
+				<ui:NavigationViewItem Content="Your Cart" Tag="SamplePage5" IconSource="Shop" />
+				<ui:NavigationViewItem Content="Help" Tag="SamplePage6" IconSource="Help" />
+			</ui:NavigationView.FooterMenuItems>
+		</ui:NavigationView>
+	
+	</DockPanel>
+
+	
 
 </UserControl>
