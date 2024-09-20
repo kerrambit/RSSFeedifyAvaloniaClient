@@ -79,7 +79,7 @@ public partial class LoginViewModel : ViewModelBase
         _mainViewModel = mainViewModel;
     }
 
-    public LoginViewModel() {}
+    public LoginViewModel() { }
 
     [RelayCommand]
     private async Task Login()
