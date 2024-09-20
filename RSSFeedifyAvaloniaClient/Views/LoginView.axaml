@@ -17,7 +17,12 @@
 		<TextBlock FontSize="32" Text="RSSFeedify GUI Client" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0 32 0 0"/>
 
 		<!-- Login Label -->
-		<TextBlock FontSize="26" Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0 0 0 32"/>
+		<TextBlock FontSize="26" Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0 0 0 0"/>
+
+		<!-- Logo -->
+		<Border DockPanel.Dock="Top" ClipToBounds="True">
+			<Image Source="avares://RSSFeedifyAvaloniaClient/Assets/rssfeedify-logo.ico" MaxWidth="70" HorizontalAlignment="Center"/>
+		</Border>
 
 		<!-- Registration Prompt at the Bottom -->
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="48" DockPanel.Dock="Bottom">
