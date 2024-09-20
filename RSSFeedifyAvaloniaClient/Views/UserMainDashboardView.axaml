@@ -17,11 +17,18 @@
 
 		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
 			<!-- Here will be top banner, with notifications bell and user profile. -->
+			<Button VerticalAlignment="Center" HorizontalAlignment="Right">User account</Button>
 		</StackPanel>
 		
 		<ui:NavigationView x:Name="UserMainDashboard" DockPanel.Dock="Bottom">
 			<ui:NavigationView.MenuItems>
 				<ui:NavigationViewItem Content="Browse" Tag="SamplePage1" IconSource="Library" />
+				<ui:NavigationViewItem Content="Account" Tag="SamplePage2" IconSource="Home">
+					<ui:NavigationViewItem.MenuItems>
+						<ui:NavigationViewItem Content="Mail" IconSource="Mail" Tag="SamplePage3" />
+						<ui:NavigationViewItem Content="Calendar" IconSource="Calendar" Tag="SamplePage4" />
+					</ui:NavigationViewItem.MenuItems>
+				</ui:NavigationViewItem>
 				<ui:NavigationViewItem Content="Track an Order" Tag="SamplePage2" IconSource="Map" />
 				<ui:NavigationViewItem Content="Order History" Tag="SamplePage3" IconSource="Tag" />
 			</ui:NavigationView.MenuItems>
@@ -30,8 +37,7 @@
 				<ui:NavigationViewItem Content="Your Cart" Tag="SamplePage5" IconSource="Shop" />
 				<ui:NavigationViewItem Content="Help" Tag="SamplePage6" IconSource="Help" />
 			</ui:NavigationView.FooterMenuItems>
-		</ui:NavigationView>
-	
+		</ui:NavigationView>	
 	</DockPanel>
 
 	
