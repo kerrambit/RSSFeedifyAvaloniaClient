@@ -8,6 +8,8 @@ namespace RSSFeedifyAvaloniaClient.Views;
 
 public partial class UserMainDashboardView : UserControl
 {
+    private UserMainDashboardTabsViewModel? _dataContext = null;
+
     public UserMainDashboardView()
     {
         AvaloniaXamlLoader.Load(this);
@@ -37,16 +39,37 @@ public partial class UserMainDashboardView : UserControl
             var tag = navigationViewItem.Tag;
             if (tag != null)
             {
-                UserControl? page = tag switch
-                {
-                    "SamplePage1" => new LoginView(),
-                    _ => null
-                };
+                //UserControl? page = tag switch
+                //{
+                //    "SamplePage1" => new UserMainDashboardTabsView(),
+                //    _ => null
+                //};
 
-                if (page is not null)
+                //if (page is not null)
+                //{
+                //    (sender as NavigationView).Content = page;
+
+                //    if (_dataContext is null)
+                //    {
+                //        _dataContext = new UserMainDashboardTabsViewModel();
+                //    }
+
+                //    page.DataContext = _dataContext;
+                //    _dataContext.Documents.Add(new($"{tag}"));
+
+                UserControl? page = new UserMainDashboardTabsView();
+                (sender as NavigationView).Content = page;
+
+                if (_dataContext is null)
                 {
-                    (sender as NavigationView).Content = page;
-                    page.DataContext = new LoginViewModel();
+                    _dataContext = new UserMainDashboardTabsViewModel();
+                }
+
+                page.DataContext = _dataContext;
+
+                if (!_dataContext.Documents.Any(doc => doc.Header == $"{tag}"))
+                {
+                    _dataContext.Documents.Add(new DocumentItem($"{tag}"));
                 }
             }
         }

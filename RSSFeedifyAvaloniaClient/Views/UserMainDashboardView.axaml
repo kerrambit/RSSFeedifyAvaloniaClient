@@ -22,8 +22,10 @@
 
 		<ui:NavigationView x:Name="nvSample1" PaneDisplayMode="Left">
 			<ui:NavigationView.MenuItems>
-				<ui:NavigationViewItem Content="All Feeds" Tag="SamplePage1" IconSource="Play"/>
-				<ui:NavigationViewItem Content="Watched Feeds" Tag="SamplePage2" IconSource="Save" />
+				
+				<ui:NavigationViewItem Content="All Feeds" Tag="All Feeds" IconSource="Play"/>
+				<ui:NavigationViewItem Content="Watched Feeds" Tag="Watched Feeds" IconSource="Save" />
+				
 				<ui:NavigationViewItem Content="Tech [category]" Tag="SamplePage2" IconSource="Home">
 					<ui:NavigationViewItem.MenuItems>
 						<ui:NavigationViewItem Content="Youtube" IconSource="Mail" Tag="SamplePage3" />
@@ -31,8 +33,10 @@
 						<ui:NavigationViewItem Content="AIEasily.com" IconSource="Calendar" Tag="SamplePage4" />
 					</ui:NavigationViewItem.MenuItems>
 				</ui:NavigationViewItem>
-				<ui:NavigationViewItem Content="Recomended" Tag="SamplePage3" IconSource="Refresh" />
+				
+				<ui:NavigationViewItem Content="Recommended" Tag="Recommended" IconSource="Refresh" />
 			</ui:NavigationView.MenuItems>
+			
 		</ui:NavigationView>
 		
 	</DockPanel>
