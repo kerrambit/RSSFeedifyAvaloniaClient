@@ -12,5 +12,4 @@ public partial class UserMainDashboardViewModel : ViewModelBase
     public UserMainDashboardViewModel() { }
 
     public string? JWT => _mainViewModel.UserJWT;
-
 }
