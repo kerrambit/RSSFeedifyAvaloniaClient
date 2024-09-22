@@ -21,7 +21,7 @@
 			<Button VerticalAlignment="Center" HorizontalAlignment="Right">User account</Button>
 		</StackPanel>
 
-		<ui:NavigationView x:Name="nvSample1" PaneDisplayMode="Left" MenuItemsSource="{Binding NavigationViewItems}" SelectedItem="{Binding NavigationItem}">
+		<ui:NavigationView x:Name="UserMainDashboardNavigationView" PaneDisplayMode="Left" MenuItemsSource="{Binding NavigationViewItems}" SelectedItem="{Binding NavigationItem}">
 			<ui:NavigationView.MenuItemTemplate>
 				<DataTemplate DataType="dm:NavigationItem">
 					<ui:NavigationViewItem Content="{Binding Content}" IconSource="{Binding IconSource}" Tag="{Binding Tag}" MenuItemsSource="{Binding SubItems}" />

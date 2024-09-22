@@ -16,11 +16,11 @@ public partial class UserMainDashboardView : UserControl
         AvaloniaXamlLoader.Load(this);
 
         // Default NavView
-        var nv = this.FindControl<NavigationView>("nvSample1");
-        nv.SelectionChanged += OnNVSample1SelectionChanged;
+        var nv = this.FindControl<NavigationView>("UserMainDashboardNavigationView");
+        nv.SelectionChanged += OnUserMainDashboardNavigationViewSelectionChanged;
     }
 
-    private void OnNVSample1SelectionChanged(object sender, NavigationViewSelectionChangedEventArgs e)
+    private void OnUserMainDashboardNavigationViewSelectionChanged(object sender, NavigationViewSelectionChangedEventArgs e)
     {
         //if (e.IsSettingsSelected)
         //{
