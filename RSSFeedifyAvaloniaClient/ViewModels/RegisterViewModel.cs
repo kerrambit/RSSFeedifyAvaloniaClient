@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RSSFeedifyAvaloniaClient.Business.Errors;
 using RSSFeedifyAvaloniaClient.Services.API.Auth;
 using RSSFeedifyAvaloniaClient.Services.Validation;
 using RSSFeedifyCommon.Models;
@@ -115,7 +116,13 @@ public partial class RegisterViewModel : ViewModelBase
         var registrationResult = await new RegisterService().Register(registrationData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
         if (registrationResult.IsError)
         {
-            OnUnsuccessfullLogin(registrationResult.GetError);
+            string details = registrationResult.GetError.Details;
+            if (registrationResult.GetError is HttpResponseMessageValidationError error)
+            {
+                details = error.ContentMessage;
+            }
+
+            OnUnsuccessfullLogin(details);
             return;
         }
 
@@ -129,7 +136,13 @@ public partial class RegisterViewModel : ViewModelBase
         var loginResult = await new LoginService().Login(loginData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
         if (loginResult.IsError)
         {
-            OnUnsuccessfullLogin(loginResult.GetError);
+            string details = loginResult.GetError.Details;
+            if (loginResult.GetError is HttpResponseMessageValidationError error)
+            {
+                details = error.ContentMessage;
+            }
+
+            OnUnsuccessfullLogin(details);
             return;
         }
 
