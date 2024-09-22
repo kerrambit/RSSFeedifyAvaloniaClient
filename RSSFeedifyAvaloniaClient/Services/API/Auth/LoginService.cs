@@ -3,9 +3,9 @@ using ClientNetLib.Services.Networking;
 using RSSFeedifyCommon.Models;
 using System.Threading.Tasks;
 
-namespace RSSFeedifyAvaloniaClient.Services.Auth
+namespace RSSFeedifyAvaloniaClient.Services.API.Auth
 {
-    public static class LoginService
+    public class LoginService : ILoginService
     {
         private static readonly HttpResponseMessageValidator _httpResponseMessageValidator = new HttpResponseMessageValidatorBuilder()
             .AddStatusCodeCheck(HTTPService.StatusCode.OK)
@@ -13,7 +13,7 @@ namespace RSSFeedifyAvaloniaClient.Services.Auth
             .Build();
 
         // TODO: use specialized error type instead of string in the future
-        public static async Task<RSSFeedifyCommon.Types.Result<LoginResponseDTO, string>> Login(LoginDTO loginData, HTTPService httpService, UriResourceCreator uriResourceCreator)
+        public async Task<RSSFeedifyCommon.Types.Result<LoginResponseDTO, string>> Login(LoginDTO loginData, HTTPService httpService, UriResourceCreator uriResourceCreator)
         {
             var postResult = await httpService.PostAsync(uriResourceCreator.BuildUri(EndPoint.ApplicationUser.ConvertToString(), "login"), JsonConvertor.ConvertObjectToJsonString(loginData));
             if (postResult.IsError)

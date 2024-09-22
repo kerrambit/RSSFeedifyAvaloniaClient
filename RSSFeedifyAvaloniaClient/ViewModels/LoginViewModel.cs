@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RSSFeedifyAvaloniaClient.Services.API.Auth;
 using RSSFeedifyAvaloniaClient.Services.Validation;
 using RSSFeedifyCommon.Models;
 using System.Threading.Tasks;
@@ -84,7 +85,7 @@ public partial class LoginViewModel : ViewModelBase
         loginData.Password = Password;
         loginData.RememberMe = false;
 
-        var loginResult = await Services.Auth.LoginService.Login(loginData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
+        var loginResult = await new LoginService().Login(loginData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
         if (loginResult.IsError)
         {
             OnUnsuccessfullLogin(loginResult.GetError);

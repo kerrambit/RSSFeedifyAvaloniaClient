@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RSSFeedifyAvaloniaClient.Services.API.Auth;
 using RSSFeedifyAvaloniaClient.Services.Validation;
 using RSSFeedifyCommon.Models;
 using System.Threading.Tasks;
@@ -111,7 +112,7 @@ public partial class RegisterViewModel : ViewModelBase
         registrationData.Password = Password;
         registrationData.ConfirmPassword = ConfirmPassword;
 
-        var registrationResult = await Services.Auth.RegisterService.Register(registrationData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
+        var registrationResult = await new RegisterService().Register(registrationData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
         if (registrationResult.IsError)
         {
             OnUnsuccessfullLogin(registrationResult.GetError);
@@ -125,7 +126,7 @@ public partial class RegisterViewModel : ViewModelBase
         loginData.Password = Password;
         loginData.RememberMe = false;
 
-        var loginResult = await Services.Auth.LoginService.Login(loginData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
+        var loginResult = await new LoginService().Login(loginData, _mainViewModel.HttpService, _mainViewModel.UriResourceCreator);
         if (loginResult.IsError)
         {
             OnUnsuccessfullLogin(loginResult.GetError);
