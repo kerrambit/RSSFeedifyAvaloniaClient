@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using FluentAvalonia.UI.Controls;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 
 namespace RSSFeedifyAvaloniaClient.ViewModels
@@ -9,7 +7,7 @@ namespace RSSFeedifyAvaloniaClient.ViewModels
     {
         public ObservableCollection<DocumentItem> Documents { get; } = new ObservableCollection<DocumentItem>();
 
-        public UserMainDashboardTabsViewModel() {}
+        public UserMainDashboardTabsViewModel() { }
     }
 
     public class DocumentItem
