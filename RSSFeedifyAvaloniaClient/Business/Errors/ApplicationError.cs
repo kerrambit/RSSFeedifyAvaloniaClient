@@ -41,7 +41,7 @@ namespace RSSFeedifyAvaloniaClient.Business.Errors
             return stringBuilder.ToString();
         }
 
-        private static void FormatError(StringBuilder builder, ApplicationError error, int level)
+        protected static void FormatError(StringBuilder builder, ApplicationError error, int level)
         {
             builder.AppendLine($"{new string(' ', level * 4)}[{error.GetType().Name}]: {error.Message}. Details: '{error.Details}'.");
 

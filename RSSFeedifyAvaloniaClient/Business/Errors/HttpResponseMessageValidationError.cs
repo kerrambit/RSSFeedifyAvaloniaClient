@@ -1,4 +1,6 @@
-﻿namespace RSSFeedifyAvaloniaClient.Business.Errors
+﻿using System.Text;
+
+namespace RSSFeedifyAvaloniaClient.Business.Errors
 {
     public class HttpResponseMessageValidationError : ApplicationError
     {
@@ -20,6 +22,23 @@
             : base(externalError)
         {
             ContentMessage = contentMessage;
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            FormatError(stringBuilder, this, 0);
+            return stringBuilder.ToString();
+        }
+
+        private static void FormatError(StringBuilder builder, HttpResponseMessageValidationError error, int level)
+        {
+            builder.AppendLine($"{new string(' ', level * 4)}[{error.GetType().Name}]: {error.Message}. Details: '{error.Details}'. HTTP response content: '{error.ContentMessage}'.");
+
+            foreach (var innerError in error.InnerErrors)
+            {
+                ApplicationError.FormatError(builder, innerError, level + 1);
+            }
         }
     }
 }
