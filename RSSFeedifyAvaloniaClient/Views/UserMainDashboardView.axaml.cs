@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FluentAvalonia.UI.Controls;
+using RSSFeedifyAvaloniaClient.DataModels;
 using RSSFeedifyAvaloniaClient.ViewModels;
 using System.Linq;
 
@@ -17,8 +18,6 @@ public partial class UserMainDashboardView : UserControl
         // Default NavView
         var nv = this.FindControl<NavigationView>("nvSample1");
         nv.SelectionChanged += OnNVSample1SelectionChanged;
-        nv.SelectedItem = nv.MenuItems.ElementAt(0);
-
     }
 
     private void OnNVSample1SelectionChanged(object sender, NavigationViewSelectionChangedEventArgs e)
@@ -33,8 +32,7 @@ public partial class UserMainDashboardView : UserControl
         //    var pg = Activator.CreateInstance(Type.GetType(smpPage));
         //    (sender as NavigationView).Content = pg;
         //}
-
-        if (e.SelectedItem is NavigationViewItem navigationViewItem)
+        if (e.SelectedItem is NavigationItem navigationViewItem)
         {
             var tag = navigationViewItem.Tag;
             if (tag != null)
