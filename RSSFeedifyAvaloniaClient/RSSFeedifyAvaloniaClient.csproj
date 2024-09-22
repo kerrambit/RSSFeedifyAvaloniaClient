@@ -11,6 +11,14 @@
   </ItemGroup>
 
   <ItemGroup>
+		<Content Include="loggingsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />

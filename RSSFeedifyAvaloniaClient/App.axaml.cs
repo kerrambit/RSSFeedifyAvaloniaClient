@@ -1,9 +1,14 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using ClientNetLib.Services.EnvironmentUtils;
 using ClientNetLib.Services.Networking;
+using RSSFeedifyAvaloniaClient.Business.Errors;
+using RSSFeedifyAvaloniaClient.Services;
 using RSSFeedifyAvaloniaClient.ViewModels;
 using RSSFeedifyAvaloniaClient.Views;
+using RSSFeedifyCommon.Services;
+using static CommunityToolkit.Mvvm.ComponentModel.__Internals.__TaskExtensions.TaskAwaitableWithoutEndValidation;
 
 namespace RSSFeedifyAvaloniaClient;
 
@@ -16,7 +21,17 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
 
         // Add the ViewLocator programmatically
-        this.DataTemplates.Add(new ViewLocator());
+        DataTemplates.Add(new ViewLocator());
+
+        // Load directory for loggingsettings.json file.
+        var configFilesDirectoryResult = ConfigDirectoryService.GetConfigFilesDirectory();
+        if (configFilesDirectoryResult.IsError)
+        {
+            return;
+        }
+
+        LoggingService loggerService = new LoggingService(configFilesDirectoryResult.GetValue);
+        Logger.Initialize(loggerService);
     }
 
     public override void OnFrameworkInitializationCompleted()
