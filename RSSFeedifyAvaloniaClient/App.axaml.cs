@@ -3,12 +3,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using ClientNetLib.Services.EnvironmentUtils;
 using ClientNetLib.Services.Networking;
-using RSSFeedifyAvaloniaClient.Business.Errors;
-using RSSFeedifyAvaloniaClient.Services;
 using RSSFeedifyAvaloniaClient.ViewModels;
 using RSSFeedifyAvaloniaClient.Views;
 using RSSFeedifyCommon.Services;
-using static CommunityToolkit.Mvvm.ComponentModel.__Internals.__TaskExtensions.TaskAwaitableWithoutEndValidation;
 
 namespace RSSFeedifyAvaloniaClient;
 

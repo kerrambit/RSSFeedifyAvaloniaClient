@@ -1,5 +1,5 @@
-﻿using System.Runtime.CompilerServices;
-using System.IO;
+﻿using System.IO;
+using System.Runtime.CompilerServices;
 
 public static class Logger
 {

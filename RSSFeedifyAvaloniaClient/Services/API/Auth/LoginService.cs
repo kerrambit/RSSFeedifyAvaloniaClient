@@ -2,7 +2,6 @@
 using ClientNetLib.Services.Networking;
 using RSSFeedifyAvaloniaClient.Business.Errors;
 using RSSFeedifyCommon.Models;
-using Serilog.Core;
 using System.Threading.Tasks;
 
 namespace RSSFeedifyAvaloniaClient.Services.API.Auth
