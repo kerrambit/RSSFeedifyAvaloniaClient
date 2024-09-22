@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:RSSFeedifyAvaloniaClient.ViewModels"
+			 xmlns:dm="clr-namespace:RSSFeedifyAvaloniaClient.DataModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:ui="using:FluentAvalonia.UI.Controls"
              x:Class="RSSFeedifyAvaloniaClient.Views.UserMainDashboardView"
@@ -20,27 +21,14 @@
 			<Button VerticalAlignment="Center" HorizontalAlignment="Right">User account</Button>
 		</StackPanel>
 
-		<ui:NavigationView x:Name="nvSample1" PaneDisplayMode="Left">
-			<ui:NavigationView.MenuItems>
-				
-				<ui:NavigationViewItem Content="All Feeds" Tag="All Feeds" IconSource="Play"/>
-				<ui:NavigationViewItem Content="Watched Feeds" Tag="Watched Feeds" IconSource="Save" />
-				
-				<ui:NavigationViewItem Content="Tech [category]" Tag="SamplePage2" IconSource="Home">
-					<ui:NavigationViewItem.MenuItems>
-						<ui:NavigationViewItem Content="Youtube" IconSource="Mail" Tag="SamplePage3" />
-						<ui:NavigationViewItem Content="NYT tech" IconSource="Calendar" Tag="SamplePage4" />
-						<ui:NavigationViewItem Content="AIEasily.com" IconSource="Calendar" Tag="SamplePage4" />
-					</ui:NavigationViewItem.MenuItems>
-				</ui:NavigationViewItem>
-				
-				<ui:NavigationViewItem Content="Recommended" Tag="Recommended" IconSource="Refresh" />
-			</ui:NavigationView.MenuItems>
-			
+		<ui:NavigationView x:Name="nvSample1" PaneDisplayMode="Left" MenuItemsSource="{Binding NavigationViewItems}" SelectedItem="{Binding NavigationItem}">
+			<ui:NavigationView.MenuItemTemplate>
+				<DataTemplate DataType="dm:NavigationItem">
+					<ui:NavigationViewItem Content="{Binding Content}" IconSource="{Binding IconSource}" Tag="{Binding Tag}" MenuItemsSource="{Binding SubItems}" />
+				</DataTemplate>
+			</ui:NavigationView.MenuItemTemplate>
 		</ui:NavigationView>
 		
 	</DockPanel>
-
-	
 
 </UserControl>
