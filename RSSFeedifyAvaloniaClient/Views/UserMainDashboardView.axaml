@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:RSSFeedifyAvaloniaClient.ViewModels"
+			 xmlns:dm="clr-namespace:RSSFeedifyAvaloniaClient.DataModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:ui="using:FluentAvalonia.UI.Controls"
+             x:Class="RSSFeedifyAvaloniaClient.Views.UserMainDashboardView"
+	         x:DataType="vm:UserMainDashboardViewModel">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:UserMainDashboardViewModel />
+	</Design.DataContext>
+
+	<DockPanel>
+
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+			<!-- Here will be top banner, with notifications bell and user profile. -->
+			<Button VerticalAlignment="Center" HorizontalAlignment="Right">User account</Button>
+		</StackPanel>
+
+		<ui:NavigationView x:Name="nvSample1" PaneDisplayMode="Left" MenuItemsSource="{Binding NavigationViewItems}" SelectedItem="{Binding NavigationItem}">
+			<ui:NavigationView.MenuItemTemplate>
+				<DataTemplate DataType="dm:NavigationItem">
+					<ui:NavigationViewItem Content="{Binding Content}" IconSource="{Binding IconSource}" Tag="{Binding Tag}" MenuItemsSource="{Binding SubItems}" />
+				</DataTemplate>
+			</ui:NavigationView.MenuItemTemplate>
+		</ui:NavigationView>
+		
+	</DockPanel>
+
+</UserControl>
